@@ -18,6 +18,8 @@ func main() {
 
 	config.ConnectDB()
 
+	
+	
 	// Auto migrate tables
 	config.DB.AutoMigrate(&models.User{})
 

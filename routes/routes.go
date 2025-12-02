@@ -19,6 +19,7 @@ func SetupRoutes(router *gin.Engine) {
 
 	api := router.Group("/api")
 	{
+		api.POST("/login", controllers.Login)
 		api.GET("/users", controllers.GetUsers)
 		api.POST("/user", controllers.CreateUser)
 	}

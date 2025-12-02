@@ -22,7 +22,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	user := models.User{Name: input.Name, Email: input.Email}
+	user := models.User{Name: input.Name, Email: input.Email, Password: input.Password}
 	if err := config.DB.Create(&user).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

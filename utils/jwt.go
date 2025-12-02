@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 	"time"
@@ -19,7 +20,8 @@ type Claims struct {
 }
 
 func GenerateAccessToken(userID uint) (string, error) {
-	minutes, _ := strconv.Atoi(os.Getenv("ACCESS_TOKEN_MINUTE"))
+	minutes, _ := strconv.Atoi(os.Getenv("ACCESS_TOKEN_MINUTES"))
+	fmt.Println("Minutes value from env:", minutes)
 	expiration := time.Now().Add(time.Duration(minutes) * time.Minute)
 
 	claims := &Claims{
@@ -51,6 +53,10 @@ func ValidateToken(tokenString string) (*Claims, error) {
 			return jwtSecret, nil
 		},
 	)
+
+
+	fmt.Println("token after validate is:", token)
+	fmt.Println("Error occured during validation:", err)
 
 	if err != nil || !token.Valid {
 		return nil, err

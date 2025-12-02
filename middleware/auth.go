@@ -1,11 +1,12 @@
 package middleware
 
 import (
+	// "fmt"
 	"net/http"
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kshitizgajurel/kshitizgajurel/utils"
+	"github.com/kshitizgajurel/go_first_project/utils"
 )
 
 func AuthMiddleware() gin.HandlerFunc {
@@ -23,6 +24,8 @@ func AuthMiddleware() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
+
+		// fmt.Println("Parts in Authorization: ", parts)
 
 		claims, err := utils.ValidateToken(parts[1])
 		if err != nil {

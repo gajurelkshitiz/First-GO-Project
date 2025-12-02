@@ -5,6 +5,7 @@ import (
 	
 	"github.com/gin-gonic/gin"
 	"github.com/kshitizgajurel/go_first_project/controllers"
+	"github.com/kshitizgajurel/go_first_project/middleware"
 )
 
 func SetupRoutes(router *gin.Engine) {
@@ -20,7 +21,7 @@ func SetupRoutes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
 		api.POST("/login", controllers.Login)
-		api.GET("/users", controllers.GetUsers)
 		api.POST("/user", controllers.CreateUser)
+		api.GET("/users", middleware.AuthMiddleware(),  controllers.GetUsers)
 	}
 }
